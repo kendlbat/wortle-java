@@ -111,7 +111,9 @@ public class WortleLogic {
         if (guessedWrong.size() != 0) {
             sb.append("(?=^[^");
             for (Character gw : guessedWrong) {
-                sb.append(gw);
+                if (!haveToBeIncluded.contains(gw) && !guessedRight.contains(gw + "")) {
+                    sb.append(gw);
+                }
             }
             sb.append("]+$)");
         }
