@@ -47,7 +47,7 @@ public class WortleLogic {
         }
 
         for (int i = 0; i < input.length(); i++) {
-            if (charPool.contains(input.charAt(i) + "")) {
+            if (charPool.contains(input.charAt(i) + "") && charStates.get(i) == CharStates.WRONG) {
                 charStates.set(i, CharStates.IN_WORD);
                 charPool.remove(input.charAt(i) + "");
             }
