@@ -69,18 +69,24 @@ public class Main {
         String guessedRight;
         List<List<Character>> guessedWrongAtPos;
         String input;
+        String wordListFile;
 
         while (playAgain) {
             ANSI.clearScreen();
             System.out.println(getLogo());
             System.out.println();
-            System.out.print("Please choose a wordlist: ");
+            System.out.println("(c) Karim Memić & Tobias Kendlbacher 2022");
+            System.out.println();
+            System.out.println("Welcome to Wortle!");
+            System.out.print("Please choose a wordlist (DE/EN)");
+            wordListFile = userInputAnyCase("(de|en)").strip().toUpperCase();
+
 
             // TODO: ACTUALLY IMPLEMENT THIS
 
             ANSI.clearScreen();
 
-            wlogic = new WortleLogic("wordlists/EN.txt");
+            wlogic = new WortleLogic(String.format("wordlists/%s.txt", wordListFile));
             actualWord = wlogic.getRandomWord();
             guesses = new ArrayList<>(GUESSES);
             priorCharStates = new ArrayList<>(GUESSES);
@@ -91,12 +97,12 @@ public class Main {
                 guessedWrongAtPos.add(new ArrayList<>(GUESSES));
             }
 
-            System.out.println("Wortle");
+            System.out.printf("Wortle (%s)%n", wordListFile);
             System.out.println("------------------");
             System.out.println("Please enter your first guess");
             System.out.println("------------------");
 
-            while (guesses.size() < GUESSES) {
+            while (true) {
                 do {
                     input = userInputAnyCase("[a-zäöüß]{5}");
                 } while (!wlogic.checkWord(input));
@@ -120,7 +126,7 @@ public class Main {
                 currentRegex = WortleLogic.generateRegex(guessedWrong, guessedWrongAtPos, guessedRight);
 
                 if (input.equals(actualWord)) {
-                    System.out.println("Wortle");
+                    System.out.printf("Wortle (%s)%n", wordListFile);
                     System.out.println("------------------");
                     System.out.println("Congratulations! You guessed the word!");
                     System.out.println("------------------");
@@ -131,8 +137,20 @@ public class Main {
                     break;
                 }
 
+                if (!(guesses.size() < GUESSES)) {
+                    System.out.printf("Wortle (%s)%n", wordListFile);
+                    System.out.println("------------------");
+                    System.out.printf("You lost! The word was \"%s\"%n", actualWord);
+                    System.out.println("------------------");
+                    System.out.print("Play again? (y/n)");
+                    if (userInputAnyCase("(y|n)").equals("n")) {
+                        playAgain = false;
+                    }
+                    break;
+                }
+
                 ANSI.clearScreen();
-                System.out.println("Wortle");
+                System.out.printf("Wortle (%s)%n", wordListFile);
                 System.out.println("------------------");
                 System.out.printf("Current RegEX: %s%n", currentRegex);
                 System.out.printf("Possible matches: %d/%d%n", wlogic.getMatchAmount(currentRegex), wlogic.getWordAmount());
