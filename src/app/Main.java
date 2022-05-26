@@ -104,7 +104,7 @@ public class Main {
 
             while (true) {
                 do {
-                    input = userInputAnyCase("[a-zäöüß]{5}");
+                    input = userInputAnyCase("[a-z]{5}");
                 } while (!wlogic.checkWord(input));
                 List<CharStates> charStates = wlogic.checkLetters(actualWord, input);
 
@@ -162,7 +162,7 @@ public class Main {
 
                 System.out.println("------------------");
 
-                System.out.println(WortleLogic.generateKeyboard(guessedWrong));
+                System.out.println(WortleLogic.generateKeyboard(guessedWrong, guessedWrongAtPos, guessedRight));
             }
 
         }

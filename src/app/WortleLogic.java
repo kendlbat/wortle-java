@@ -93,13 +93,19 @@ public class WortleLogic {
      * @param guessedWrong The list of characters that were already guessed, but not in the word
      * @return A formatted keyboard as string
      * */
-    public static String generateKeyboard(List<Character> guessedWrong) {
+    public static String generateKeyboard(List<Character> guessedWrong, List<List<Character>> guessedWrongAtPos, String guessedRight) {
         String order = "q w e r t z u i o p\n a s d f g h j k l\n  y x c v b n m";
         StringBuilder sb = new StringBuilder();
+
+        List<Character> haveToBeIncluded = extractNeededChars(guessedWrongAtPos);
 
         for (int i = 0; i < order.length(); i++) {
             if (guessedWrong.contains(order.charAt(i))) {
                 sb.append(ANSI.getColoredString(ANSI.ANSI_BLACK, order.charAt(i) + ""));
+            } else if (haveToBeIncluded.contains(order.charAt(i))) {
+                sb.append(ANSI.getColoredString(ANSI.ANSI_YELLOW, order.charAt(i) + ""));
+            } else if (guessedRight.contains(order.charAt(i) + "")) {
+                sb.append(ANSI.getColoredString(ANSI.ANSI_GREEN, order.charAt(i) + ""));
             } else {
                 sb.append(order.charAt(i));
             }
@@ -120,16 +126,9 @@ public class WortleLogic {
         StringBuilder sb = new StringBuilder();
 
         // Check for only lowercase letters (lookahead)
-        sb.append("(?=^[a-zäöüß]+$)");
+        sb.append("(?=^[a-z]+$)");
 
-        List<Character> haveToBeIncluded = new ArrayList<>();
-        for (List<Character> list : guessedWrongAtPos) {
-            for (Character c : list) {
-                if (!haveToBeIncluded.contains(c)) {
-                    haveToBeIncluded.add(c);
-                }
-            }
-        }
+        List<Character> haveToBeIncluded = extractNeededChars(guessedWrongAtPos);
 
         if (guessedWrong.size() != 0) {
             sb.append("(?=^[^");
@@ -145,18 +144,20 @@ public class WortleLogic {
             sb.append(String.format("(?=.*%c)", c));
         }
 
-        for (int i = 0; i < guessedWrongAtPos.size(); i++) {
-            if (guessedRight.charAt(i) == '.' && guessedWrongAtPos.get(i).size() != 0) {
-                sb.append(String.format("(?=.{%d}[^", i));
-                for (Character c : guessedWrongAtPos.get(i)) {
-                    sb.append(c);
-                }
-                sb.append("])");
-            }
-        }
-
         sb.append("^").append(guessedRight).append("$");
 
         return sb.toString();
+    }
+
+    private static List<Character> extractNeededChars(List<List<Character>> guessedWrongAtPos) {
+        List<Character> haveToBeIncluded = new ArrayList<>();
+        for (List<Character> list : guessedWrongAtPos) {
+            for (Character c : list) {
+                if (!haveToBeIncluded.contains(c)) {
+                    haveToBeIncluded.add(c);
+                }
+            }
+        }
+        return haveToBeIncluded;
     }
 }
