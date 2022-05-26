@@ -5,7 +5,6 @@ import model.ANSI;
 import model.CharStates;
 
 import java.util.ArrayList;
-import java.util.LinkedList;
 import java.util.List;
 import java.util.Random;
 
@@ -66,6 +65,11 @@ public class WortleLogic {
         return wordList.contains(word);
     }
 
+    /**
+     * Generates a keyboard for visual output to the user.
+     * @param guessedWrong The list of characters that were already guessed, but not in the word
+     * @return A formatted keyboard as string
+     * */
     public static String generateKeyboard(List<Character> guessedWrong) {
         String order = "q w e r t z u i o p\n a s d f g h j k l\n  y x c v b n m";
         StringBuilder sb = new StringBuilder();
