@@ -66,6 +66,29 @@ public class WortleLogic {
     }
 
     /**
+     * Checks the amount of words from wordlist match with the given regex
+     * @param regex The regex to be used
+     * @return The amount of words matched
+     */
+    public int getMatchAmount(String regex) {
+        int matchAmount = 0;
+        for (String word : wordList) {
+            if (word.matches(regex)) {
+                matchAmount++;
+            }
+        }
+        return matchAmount;
+    }
+
+    /**
+     * Gets the amount of words currently loaded
+     * @return amount of words in wordList
+     */
+    public int getWordAmount() {
+        return wordList.size();
+    }
+
+    /**
      * Generates a keyboard for visual output to the user.
      * @param guessedWrong The list of characters that were already guessed, but not in the word
      * @return A formatted keyboard as string

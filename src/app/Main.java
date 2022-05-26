@@ -7,7 +7,7 @@ import java.util.*;
 import java.util.stream.Collectors;
 
 public class Main {
-    public static final int GUESSES = 5;
+    public static final int GUESSES = 6;
     public static final int WORD_LENGTH = 5;
 
     /**
@@ -62,6 +62,7 @@ public class Main {
         String actualWord = wlogic.getRandomWord();
         List<String> guesses = new ArrayList<>(GUESSES);
         List<List<CharStates>> priorCharStates = new ArrayList<>(GUESSES);
+        String currentRegex;
 
         List<Character> guessedWrong = new ArrayList<>(26);
         String guessedRight = ".....";
@@ -99,11 +100,13 @@ public class Main {
 
             guesses.add(input);
             priorCharStates.add(charStates);
+            currentRegex = WortleLogic.generateRegex(guessedWrong, guessedWrongAtPos, guessedRight);
 
             ANSI.clearScreen();
             System.out.println("Wortle");
             System.out.println("------------------");
-            System.out.printf("Current RegEX: %s%n", WortleLogic.generateRegex(guessedWrong, guessedWrongAtPos, guessedRight));
+            System.out.printf("Current RegEX: %s%n", currentRegex);
+            System.out.printf("Possible matches: %d/%d%n", wlogic.getMatchAmount(currentRegex), wlogic.getWordAmount());
             System.out.printf("Guesses left: %d/%d%n", GUESSES - guesses.size(), GUESSES);
 
             for (int i = 0; i < guesses.size(); i++) {
