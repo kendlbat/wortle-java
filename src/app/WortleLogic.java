@@ -120,7 +120,7 @@ public class WortleLogic {
         StringBuilder sb = new StringBuilder();
 
         // Check for only lowercase letters (lookahead)
-        sb.append("(?=^[a-z]+$)");
+        sb.append("(?=^[a-zäöüß]+$)");
 
         List<Character> haveToBeIncluded = new ArrayList<>();
         for (List<Character> list : guessedWrongAtPos) {
