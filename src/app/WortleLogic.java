@@ -83,7 +83,36 @@ public class WortleLogic {
         }
 
         return sb.toString();
+    }
 
+    /**
+     * Generates a regex based on facts already known to the user
+     * @param guessedWrong A list of all characters that were already wrongly guessed
+     * @param guessedInWord A list of all characters that were guessed at the wrong position
+     * @param guessedRight A string with the currently known letters
+     *                     Example: .a.se
+     * @return A valid regex for the given conditions
+     */
+    public static String generateRegex(List<Character> guessedWrong, List<Character> guessedInWord, String guessedRight) {
+        StringBuilder sb = new StringBuilder();
 
+        // Check for only lowercase letters (lookahead)
+        sb.append("(?=^[a-z]+$)");
+
+        if (guessedWrong.size() != 0) {
+            sb.append("(?=^[^");
+            for (Character gw : guessedWrong) {
+                sb.append(gw);
+            }
+            sb.append("]+$)");
+        }
+
+        for (Character c : guessedInWord) {
+            sb.append(String.format("(?=.*%c)", c));
+        }
+
+        sb.append("^").append(guessedRight).append("$");
+
+        return sb.toString();
     }
 }
