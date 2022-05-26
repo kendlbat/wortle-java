@@ -65,7 +65,11 @@ public class Main {
 
         List<Character> guessedWrong = new ArrayList<>(26);
         String guessedRight = ".....";
-        List<Character> guessedInWord = new ArrayList<>(WORD_LENGTH);
+        List<List<Character>> guessedWrongAtPos = new ArrayList<>(WORD_LENGTH);
+
+        for (int i = 0; i < WORD_LENGTH; i++) {
+            guessedWrongAtPos.add(new ArrayList<>(GUESSES));
+        }
 
         String input;
 
@@ -83,8 +87,8 @@ public class Main {
                     guessedWrong.add(input.charAt(i));
                 } else if (charStates.get(i) == CharStates.CORRECT) {
                     guessedRight = guessedRight.substring(0, i) + input.charAt(i) + guessedRight.substring(i + 1);
-                } else if (charStates.get(i) == CharStates.IN_WORD && !guessedInWord.contains(input.charAt(i))) {
-                    guessedInWord.add(input.charAt(i));
+                } else if (charStates.get(i) == CharStates.IN_WORD && !guessedWrongAtPos.get(i).contains(input.charAt(i))) {
+                    guessedWrongAtPos.get(i).add(input.charAt(i));
                 }
             }
 
@@ -97,7 +101,7 @@ public class Main {
             ANSI.clearScreen();
             System.out.println("Wortle");
             System.out.println("------------------");
-            System.out.printf("Current RegEX: %s%n", WortleLogic.generateRegex(guessedWrong, guessedInWord, guessedRight));
+            System.out.printf("Current RegEX: %s%n", WortleLogic.generateRegex(guessedWrong, guessedWrongAtPos, guessedRight));
             System.out.printf("Guesses left: %d/%d%n", GUESSES - guesses.size(), GUESSES);
 
             for (int i = 0; i < guesses.size(); i++) {

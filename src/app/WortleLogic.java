@@ -88,16 +88,25 @@ public class WortleLogic {
     /**
      * Generates a regex based on facts already known to the user
      * @param guessedWrong A list of all characters that were already wrongly guessed
-     * @param guessedInWord A list of all characters that were guessed at the wrong position
+     * @param guessedWrongAtPos A list of the positions characters were wrongly guessed at
      * @param guessedRight A string with the currently known letters
      *                     Example: .a.se
      * @return A valid regex for the given conditions
      */
-    public static String generateRegex(List<Character> guessedWrong, List<Character> guessedInWord, String guessedRight) {
+    public static String generateRegex(List<Character> guessedWrong, List<List<Character>> guessedWrongAtPos, String guessedRight) {
         StringBuilder sb = new StringBuilder();
 
         // Check for only lowercase letters (lookahead)
         sb.append("(?=^[a-z]+$)");
+
+        List<Character> haveToBeIncluded = new ArrayList<>();
+        for (List<Character> list : guessedWrongAtPos) {
+            for (Character c : list) {
+                if (!haveToBeIncluded.contains(c)) {
+                    haveToBeIncluded.add(c);
+                }
+            }
+        }
 
         if (guessedWrong.size() != 0) {
             sb.append("(?=^[^");
@@ -107,8 +116,18 @@ public class WortleLogic {
             sb.append("]+$)");
         }
 
-        for (Character c : guessedInWord) {
+        for (Character c : haveToBeIncluded) {
             sb.append(String.format("(?=.*%c)", c));
+        }
+
+        for (int i = 0; i < guessedWrongAtPos.size(); i++) {
+            if (guessedRight.charAt(i) == '.' && guessedWrongAtPos.get(i).size() != 0) {
+                sb.append(String.format("(?=.{%d}[^", i));
+                for (Character c : guessedWrongAtPos.get(i)) {
+                    sb.append(c);
+                }
+                sb.append("])");
+            }
         }
 
         sb.append("^").append(guessedRight).append("$");
