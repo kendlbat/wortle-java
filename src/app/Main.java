@@ -75,6 +75,8 @@ public class Main {
 
         ANSI.clearScreen();
         System.out.println(getLogo());
+        System.out.println();
+        System.out.print("Please enter your first guess");
 
         while (guesses.size() < GUESSES) {
             do {
