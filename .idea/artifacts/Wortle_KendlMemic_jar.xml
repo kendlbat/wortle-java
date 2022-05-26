@@ -1,0 +1,11 @@
+<component name="ArtifactManager">
+  <artifact type="jar" build-on-make="true" name="Wortle-KendlMemic:jar">
+    <output-path>$PROJECT_DIR$/out/artifacts/Wortle_KendlMemic_jar</output-path>
+    <root id="archive" name="Wortle-KendlMemic.jar">
+      <element id="module-output" name="Wortle-KendlMemic" />
+      <element id="directory" name="wordlists">
+        <element id="dir-copy" path="$PROJECT_DIR$/wordlists" />
+      </element>
+    </root>
+  </artifact>
+</component>
