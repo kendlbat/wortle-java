@@ -11,8 +11,8 @@ import java.util.Random;
 public class WortleLogic {
     public List<String> wordList;
 
-    public WortleLogic() {
-        wordList = FileHandler.readFileLines("wordlist.txt");
+    public WortleLogic(String wordListFile) {
+        wordList = FileHandler.readFileLines(wordListFile);
     }
 
     /**

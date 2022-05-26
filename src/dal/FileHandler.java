@@ -21,7 +21,7 @@ public abstract class FileHandler {
         String line;
 
         // Try loading wordlist.txt from jar
-        InputStream is = Main.class.getClassLoader().getResourceAsStream("wordlist.txt");
+        InputStream is = Main.class.getClassLoader().getResourceAsStream(fileName);
 
         if (is != null) {
             try (BufferedReader br = new BufferedReader(new InputStreamReader(is))) {
