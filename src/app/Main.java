@@ -162,6 +162,30 @@ public class Main {
 
                 System.out.println("------------------");
 
+                if (input.equals(actualWord)) {
+                    System.out.printf("Wortle (%s)%n", wordListFile);
+                    System.out.println("------------------");
+                    System.out.println("Congratulations! You guessed the word!");
+                    System.out.println("------------------");
+                    System.out.print("Play again? (y/n)");
+                    if (userInputAnyCase("(y|n)").equals("n")) {
+                        playAgain = false;
+                    }
+                    break;
+                }
+
+                if (!(guesses.size() < GUESSES)) {
+                    System.out.printf("Wortle (%s)%n", wordListFile);
+                    System.out.println("------------------");
+                    System.out.printf("You lost! The word was \"%s\"%n", actualWord);
+                    System.out.println("------------------");
+                    System.out.print("Play again? (y/n)");
+                    if (userInputAnyCase("(y|n)").equals("n")) {
+                        playAgain = false;
+                    }
+                    break;
+                }
+
                 System.out.println(WortleLogic.generateKeyboard(guessedWrong, guessedWrongAtPos, guessedRight));
             }
 
