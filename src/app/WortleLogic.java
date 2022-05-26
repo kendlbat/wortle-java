@@ -100,12 +100,12 @@ public class WortleLogic {
         List<Character> haveToBeIncluded = extractNeededChars(guessedWrongAtPos);
 
         for (int i = 0; i < order.length(); i++) {
-            if (guessedWrong.contains(order.charAt(i))) {
-                sb.append(ANSI.getColoredString(ANSI.ANSI_BLACK, order.charAt(i) + ""));
+            if (guessedRight.contains(order.charAt(i) + "")) {
+                sb.append(ANSI.getColoredString(ANSI.ANSI_GREEN, order.charAt(i) + ""));
             } else if (haveToBeIncluded.contains(order.charAt(i))) {
                 sb.append(ANSI.getColoredString(ANSI.ANSI_YELLOW, order.charAt(i) + ""));
-            } else if (guessedRight.contains(order.charAt(i) + "")) {
-                sb.append(ANSI.getColoredString(ANSI.ANSI_GREEN, order.charAt(i) + ""));
+            } else if (guessedWrong.contains(order.charAt(i))) {
+                sb.append(ANSI.getColoredString(ANSI.ANSI_BLACK, order.charAt(i) + ""));
             } else {
                 sb.append(order.charAt(i));
             }
