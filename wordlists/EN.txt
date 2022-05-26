@@ -1855,7 +1855,6 @@ fleas
 lousy
 album
 sawed
-cooky
 murky
 infer
 burly
@@ -2218,7 +2217,6 @@ buoys
 stubs
 lucid
 thong
-afore
 whiff
 maxim
 hulls
@@ -2255,7 +2253,6 @@ manes
 adore
 sneer
 mango
-fiord
 flora
 roomy
 minks
@@ -2357,7 +2354,6 @@ toils
 spree
 mocks
 scans
-shorn
 revel
 raven
 hoary
@@ -2402,7 +2398,6 @@ heals
 pleas
 beret
 spilt
-gayly
 rover
 endow
 pygmy
@@ -2627,7 +2622,6 @@ emits
 agate
 pumas
 mends
-darks
 dukes
 plies
 canny
@@ -4035,26 +4029,19 @@ blabs
 splay
 talus
 porno
-moola
 nixed
 kilos
 snide
-horsy
-gesso
-jaggy
 trove
 nixes
 creel
 pater
 iotas
 cadge
-skyed
 hokum
 furze
 ankhs
 curie
-nutsy
-hilum
 remix
 angst
 burls
@@ -4740,12 +4727,8 @@ cooch
 whipt
 folky
 tyres
-wheee
 corky
-injun
 solon
-didot
-kerfs
 rayed
 wassa
 chile
