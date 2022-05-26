@@ -10,6 +10,11 @@ public class Main {
     public static final int GUESSES = 5;
     public static final int WORD_LENGTH = 5;
 
+    /**
+     * Get the next guess input from the user
+     * Uses the constants from main as constraints
+     * @return the word the user wants to guess
+     */
     public static String userInput() {
         String input;
         Scanner scanner = new Scanner(System.in);
@@ -21,6 +26,9 @@ public class Main {
         return input.toLowerCase();
     }
 
+    /**
+     * @return the logo of the game as a string
+     * */
     public static String getLogo() {
         return """
                           _____                   _______                   _____                _____                    _____            _____         \s
