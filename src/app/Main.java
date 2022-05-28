@@ -20,10 +20,12 @@ public class Main {
     public static String userInputAnyCase(String regex) {
         String input;
         Scanner scanner = new Scanner(System.in);
-        do {
-            System.out.print(": ");
+        System.out.print(": ");
+        input = scanner.nextLine();
+        while (!input.toLowerCase().matches(regex)) {
+            System.out.print("Please provide valid input!\n: ");
             input = scanner.nextLine();
-        } while (!input.toLowerCase().matches(regex));
+        }
 
         return input.toLowerCase();
     }
@@ -103,9 +105,11 @@ public class Main {
             System.out.println("------------------");
 
             while (true) {
-                do {
+                input = userInputAnyCase("[a-z]{5}");
+                while (!wlogic.checkWord(input)) {
+                    System.out.println("Please enter a valid word");
                     input = userInputAnyCase("[a-z]{5}");
-                } while (!wlogic.checkWord(input));
+                }
                 List<CharStates> charStates = wlogic.checkLetters(actualWord, input);
 
                 for (int i = 0; i < charStates.size(); i++) {
